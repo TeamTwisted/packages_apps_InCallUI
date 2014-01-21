@@ -23,6 +23,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.telecom.DisconnectCause;
 import android.telecom.Phone;
+import android.telecom.PhoneAccountHandle;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -558,5 +559,34 @@ public class CallList implements InCallPhoneListener {
     public interface CallUpdateListener {
         // TODO: refactor and limit arg to be call state.  Caller info is not needed.
         public void onCallChanged(Call call);
+    }
+
+    /**
+     * Returns true, if any voice call in ACTIVE on the provided subscription.
+     */
+    public boolean hasAnyLiveCall(long subId) {
+        for (Call call : mCallById.values()) {
+            PhoneAccountHandle ph = call.getAccountHandle();
+            if (!isCallDead(call) && ph != null && (Long.parseLong(ph.getId()) == subId)) {
+                Log.i(this, "hasAnyLiveCall sub = " + subId);
+                return true;
+            }
+        }
+        Log.i(this, "no active call ");
+        return false;
+    }
+
+    /**
+     * Returns true, if any call in ACTIVE on the provided subscription.
+     */
+    public boolean hasAnyLiveCall() {
+        for (Call call : mCallById.values()) {
+            if (!isCallDead(call)) {
+                Log.i(this, "hasAnyLiveCall call = " + call);
+                return true;
+            }
+        }
+        Log.i(this, "no active call ");
+        return false;
     }
 }
