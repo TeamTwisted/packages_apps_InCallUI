@@ -506,7 +506,7 @@ public class CallCardFragment extends BaseFragment<CallCardPresenter, CallCardPr
             mCallStateLabel.setAlpha(1);
             mCallStateLabel.setVisibility(View.VISIBLE);
 
-            if (state == Call.State.ACTIVE || state == Call.State.CONFERENCED) {
+	if (state == Call.State.ACTIVE || state == Call.State.CONFERENCED) {
                 mCallStateLabel.clearAnimation();
             } else {
                 mCallStateLabel.startAnimation(mPulseAnimation);
