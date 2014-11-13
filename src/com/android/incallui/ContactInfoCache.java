@@ -171,7 +171,8 @@ public class ContactInfoCache implements ContactsAsyncHelper.OnImageLoadComplete
         sendInfoNotifications(callId, cacheEntry);
 
         if (didLocalLookup) {
-            // Before issuing a request for more data from other services, we only check that the
+
+            // Before issuing a request for more data from other services, We only check that the
             // contact wasn't found in the local DB.  We don't check the if the cache entry already
             // has a name because we allow overriding cnap data with data from other services.
             if (!callerInfo.contactExists && cacheEntry.name == null) {
