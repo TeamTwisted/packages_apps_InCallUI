@@ -87,6 +87,7 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
     private AudioModeProvider mAudioModeProvider;
     private StatusBarNotifier mStatusBarNotifier;
+    private InCallVibrationHandler mInCallVibrationHandler;
     private ContactInfoCache mContactInfoCache;
     private Context mContext;
     private CallList mCallList;
@@ -228,6 +229,9 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
 
         mStatusBarNotifier = new StatusBarNotifier(context, mContactInfoCache);
         addListener(mStatusBarNotifier);
+
+        mInCallVibrationHandler = new InCallVibrationHandler(context);
+        addListener(mInCallVibrationHandler);
 
         mAudioModeProvider = audioModeProvider;
 
@@ -1108,6 +1112,11 @@ public class InCallPresenter implements CallList.Listener, InCallPhoneListener {
                 removeListener(mStatusBarNotifier);
             }
             mStatusBarNotifier = null;
+
+            if (mInCallVibrationHandler != null) {
+                removeListener(mInCallVibrationHandler);
+            }
+            mInCallVibrationHandler = null;
 
             if (mCallList != null) {
                 mCallList.removeListener(this);
