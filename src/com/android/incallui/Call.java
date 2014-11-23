@@ -264,6 +264,7 @@ public class Call {
     private String mLastForwardedNumber;
     private String mCallSubject;
     private PhoneAccountHandle mPhoneAccountHandle;
+    private boolean mIsOutgoing = false;
 
     /**
      * Indicates whether the phone account associated with this call supports specifying a call
@@ -487,6 +488,13 @@ public class Call {
 
     public void setState(int state) {
         mState = state;
+        if (state == State.DIALING || state == State.CONNECTING) {
+            mIsOutgoing = true;
+        }
+    }
+
+    public boolean isOutgoing() {
+        return mIsOutgoing;
     }
 
     public int getNumberPresentation() {

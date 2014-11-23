@@ -21,10 +21,12 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.ActivityNotFoundException;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.telecom.DisconnectCause;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
@@ -90,6 +92,7 @@ public class InCallPresenter implements CallList.Listener,
 
     private AudioModeProvider mAudioModeProvider;
     private StatusBarNotifier mStatusBarNotifier;
+    private InCallVibrationHandler mInCallVibrationHandler;
     private ContactInfoCache mContactInfoCache;
     private Context mContext;
     private CallList mCallList;
@@ -219,6 +222,9 @@ public class InCallPresenter implements CallList.Listener,
 
         mStatusBarNotifier = statusBarNotifier;
         addListener(mStatusBarNotifier);
+
+        mInCallVibrationHandler = new InCallVibrationHandler(context);
+        addListener(mInCallVibrationHandler);
 
         mAudioModeProvider = audioModeProvider;
 
@@ -1247,6 +1253,11 @@ public class InCallPresenter implements CallList.Listener,
                 removeListener(mStatusBarNotifier);
             }
             mStatusBarNotifier = null;
+
+            if (mInCallVibrationHandler != null) {
+                removeListener(mInCallVibrationHandler);
+            }
+            mInCallVibrationHandler = null;
 
             if (mCallList != null) {
                 mCallList.removeListener(this);
