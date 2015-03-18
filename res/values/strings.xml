@@ -420,6 +420,7 @@
 
     <!-- Text for the onscreen "Blacklist" button -->
     <string name="onscreenBlacklistText">Blacklist</string>
+    <string name="onscreenMoreMenuText">More menu</string>
 
     <!-- Blacklist confirmation dialog -->
     <string name="blacklist_dialog_title">Add to blacklist</string>

@@ -55,6 +55,7 @@
     <dimen name="in_call_button_dimension">48dp</dimen>
 
     <dimen name="primary_call_elevation">5dp</dimen>
+    <dimen name="primary_call_overflow_elevation">6dp</dimen>
     <dimen name="dialpad_elevation">2dp</dimen>
 
     <!-- The InCallUI dialpad will sometimes want digits sizes that are different from dialer.

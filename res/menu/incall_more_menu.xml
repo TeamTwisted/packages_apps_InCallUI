@@ -31,5 +31,5 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_add_to_blacklist"
-        android:title="@string/add_to_black_list"/>
+        android:title="@string/blacklist_dialog_title"/>
 </menu>
