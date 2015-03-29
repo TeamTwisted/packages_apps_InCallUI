@@ -65,7 +65,7 @@
     <color name="translucent_shadow">#33999999</color>
 
     <!-- 70% opacity, black. -->
-    <color name="glowpad_background_color">#b3000000</color>
+    <color name="glowpad_background_color">#00000000</color>
     <!-- 15% opacity, white. -->
     <color name="glowpad_outer_ring_color">#26ffffff</color>
     <color name="glowpad_text_widget_ring_color">#ffffff</color>
