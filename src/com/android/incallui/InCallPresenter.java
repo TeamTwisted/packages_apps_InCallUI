@@ -1192,6 +1192,12 @@ public class InCallPresenter implements CallList.Listener,
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
+                    if (mContext == null) {
+                        Log.e(this, "Setup did not occur before showing the InCallActivity.");
+                        activity.finish();
+                        return;
+                    }
+
                     Log.i(this, "Showing InCallActivity after circular reveal");
                     final Intent intent =
                             getInCallIntent(mShowDialpadOnStart, true, false, false);
