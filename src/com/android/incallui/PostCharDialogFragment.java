@@ -32,6 +32,9 @@ public class PostCharDialogFragment extends DialogFragment {
     private String mCallId;
     private String mPostDialStr;
 
+    public PostCharDialogFragment() {
+    }
+
     public PostCharDialogFragment(String callId, String postDialStr) {
         mCallId = callId;
         mPostDialStr = postDialStr;
@@ -40,6 +43,11 @@ public class PostCharDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         super.onCreateDialog(savedInstanceState);
+
+        if (mPostDialStr == null && savedInstanceState != null) {
+            mCallId = savedInstanceState.getString("CALL_ID");
+            mPostDialStr = savedInstanceState.getString("POST_CHARS");
+        }
 
         final StringBuilder buf = new StringBuilder();
         buf.append(getResources().getText(R.string.wait_prompt_str));
@@ -70,5 +78,13 @@ public class PostCharDialogFragment extends DialogFragment {
         super.onCancel(dialog);
 
         TelecomAdapter.getInstance().postDialContinue(mCallId, false);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString("CALL_ID", mCallId);
+        outState.putString("POST_CHARS", mPostDialStr);
     }
 }
